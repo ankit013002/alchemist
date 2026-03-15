@@ -1,0 +1,30 @@
+{
+  "name": "alchemist",
+  "version": "1.0.0",
+  "description": "Personal CLI platform for scaffolding and managing projects",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "dev": "npm run dev --workspaces",
+    "clean": "npm run clean --workspaces && rm -rf node_modules packages/*/node_modules",
+    "test": "npm run test --workspaces",
+    "cli": "node packages/cli/bin/run.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "dependencies": {
+    "@oclif/core": "^4.9.0",
+    "@oclif/plugin-help": "^6.2.38",
+    "@oclif/plugin-version": "^2.2.38",
+    "@types/prompts": "^2.4.9"
+  }
+}
