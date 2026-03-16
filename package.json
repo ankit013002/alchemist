@@ -4,7 +4,11 @@
   "description": "Personal CLI platform for scaffolding and managing projects",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/cli",
+    "packages/shared",
+    "packages/cmd-generate-next-app",
+    "packages/cmd-modify",
+    "packages/cmd-check-updates"
   ],
   "scripts": {
     "build": "npm run build --workspaces",

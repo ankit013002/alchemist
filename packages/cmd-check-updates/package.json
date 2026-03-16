@@ -1,0 +1,26 @@
+{
+  "name": "@alchemist/cmd-check-updates",
+  "version": "1.0.0",
+  "description": "Alchemist command: check-updates - check for project updates (Phase 2)",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf lib *.tsbuildinfo",
+    "test": "echo 'No tests yet'"
+  },
+  "dependencies": {
+    "@alchemist/shared": "*",
+    "@oclif/core": "^3.15.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "oclif": {
+    "commands": "./lib"
+  }
+}

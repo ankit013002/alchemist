@@ -16,10 +16,23 @@
 import * as path from "path";
 import * as fs from "fs";
 import { Command, Flags } from "@oclif/core";
-import { FileGenerator } from "@alchemist/cli-common";
-import { promptForOptions } from "@alchemist/cli-common";
-import { NextAppConfig } from "@alchemist/cli-common";
-import * as templates from "./templates";
+import { FileGenerator } from "@alchemist/shared";
+import { promptForOptions } from "@alchemist/shared";
+import { NextAppConfig } from "@alchemist/shared";
+import { generatePackageJson } from "../../templates/package-json";
+import { generateReadme } from "../../templates/readme";
+import { generateGitignore } from "../../templates/gitignore";
+import { generateNextConfig } from "../../templates/next-config";
+import { generateTsconfig } from "../../templates/configs/tsconfig";
+import { generateTailwindConfig } from "../../templates/configs/tailwind";
+import { generatePostcssConfig } from "../../templates/configs/postcss";
+import { generateGlobalsCss } from "../../templates/app/globals-css";
+import { generateEslintConfig } from "../../templates/configs/eslint";
+import { generatePrettierConfig, generatePrettierIgnore } from "../../templates/configs/prettier";
+import { generateVitestConfig } from "../../templates/configs/vitest";
+import { generateAppLayout } from "../../templates/app/layout";
+import { generateAppPage } from "../../templates/app/page";
+import { generateCnUtil } from "../../templates/utils/cn-util";
 
 const DEFAULT_CONFIG: NextAppConfig = {
   useTypeScript: true,
@@ -119,23 +132,23 @@ export default class GenerateNextApp extends Command {
       // Root files
       await generator.writeFile(
         "package.json",
-        templates.generatePackageJson(projectName, config),
+        generatePackageJson(projectName, config),
       );
       await generator.writeFile(
         "README.md",
-        templates.generateReadme(projectName, config),
+        generateReadme(projectName, config),
       );
-      await generator.writeFile(".gitignore", templates.generateGitignore());
+      await generator.writeFile(".gitignore", generateGitignore());
       await generator.writeFile(
         "next.config.js",
-        templates.generateNextConfig(),
+        generateNextConfig(),
       );
 
       // TypeScript config
       if (config.useTypeScript) {
         await generator.writeFile(
           "tsconfig.json",
-          templates.generateTsconfig(),
+          generateTsconfig(),
         );
       }
 
@@ -143,15 +156,15 @@ export default class GenerateNextApp extends Command {
       if (config.useTailwind) {
         await generator.writeFile(
           "tailwind.config.ts",
-          templates.generateTailwindConfig(),
+          generateTailwindConfig(),
         );
         await generator.writeFile(
           "postcss.config.js",
-          templates.generatePostcssConfig(),
+          generatePostcssConfig(),
         );
         await generator.writeFile(
           "app/globals.css",
-          templates.generateGlobalsCss(),
+          generateGlobalsCss(),
         );
       }
 
@@ -159,7 +172,7 @@ export default class GenerateNextApp extends Command {
       if (config.useEslint) {
         await generator.writeFile(
           "eslint.config.js",
-          templates.generateEslintConfig(config.useTypeScript),
+          generateEslintConfig(config.useTypeScript),
         );
       }
 
@@ -167,11 +180,11 @@ export default class GenerateNextApp extends Command {
       if (config.usePrettier) {
         await generator.writeFile(
           ".prettierrc.json",
-          templates.generatePrettierConfig(),
+          generatePrettierConfig(),
         );
         await generator.writeFile(
           ".prettierignore",
-          templates.generatePrettierIgnore(),
+          generatePrettierIgnore(),
         );
       }
 
@@ -179,19 +192,19 @@ export default class GenerateNextApp extends Command {
       if (config.useVitest) {
         await generator.writeFile(
           "vitest.config.ts",
-          templates.generateVitestConfig(),
+          generateVitestConfig(),
         );
       }
 
       // App Router files
       if (config.useAppRouter) {
-        const layout = templates.generateAppLayout(config.useTailwind);
-        const page = templates.generateAppPage();
+        const layout = generateAppLayout(config.useTailwind);
+        const page = generateAppPage();
         await generator.writeFile("app/layout.tsx", layout);
         await generator.writeFile("app/page.tsx", page);
         await generator.writeFile(
           "app/globals.css",
-          templates.generateGlobalsCss(),
+          generateGlobalsCss(),
         );
       }
 
@@ -199,7 +212,7 @@ export default class GenerateNextApp extends Command {
       await generator.writeFile("components/.gitkeep", "");
 
       // Utils directory
-      await generator.writeFile("utils/cn.ts", templates.generateCnUtil());
+      await generator.writeFile("utils/cn.ts", generateCnUtil());
 
       // Lib directory
       await generator.writeFile("lib/.gitkeep", "");

@@ -13,7 +13,8 @@
     "test": "echo 'No tests yet'"
   },
   "dependencies": {
-    "@alchemist/cli-common": "*",
+    "@alchemist/shared": "*",
+    "@alchemist/cmd-generate-next-app": "*",
     "@oclif/core": "^3.15.0",
     "@oclif/plugin-help": "^6.0.6",
     "@oclif/plugin-version": "^1.3.6"
@@ -26,12 +27,13 @@
     "node": ">=18.0.0"
   },
   "oclif": {
-    "commands": "./lib/commands",
     "bin": "alchemist",
     "plugins": [
       "@oclif/plugin-help",
-      "@oclif/plugin-version"
-    ]
+      "@oclif/plugin-version",
+      "@alchemist/cmd-generate-next-app"
+    ],
+    "commands": "./lib/commands"
   }
 }
 

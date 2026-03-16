@@ -1,4 +1,4 @@
-import { NextAppConfig } from "@alchemist/cli-common";
+import { NextAppConfig } from "@alchemist/shared";
 
 /**
  * Generate package.json with dependencies based on config

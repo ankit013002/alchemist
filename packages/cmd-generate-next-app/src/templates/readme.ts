@@ -1,4 +1,4 @@
-import { NextAppConfig } from "@alchemist/cli-common";
+import { NextAppConfig } from "@alchemist/shared";
 
 /**
  * Generate README.md with setup instructions
@@ -53,51 +53,43 @@ ${
 
 \`\`\`bash
 npm run lint
-\`\`\``
-    : ""
-}
+\`\`\`
 
-${
+`
+    : ""
+}${
   config.usePrettier
     ? `## Code Formatting
 
 \`\`\`bash
 npm run format
-\`\`\``
-    : ""
-}
+\`\`\`
 
-${
+`
+    : ""
+}${
   config.useVitest
     ? `## Testing
 
 \`\`\`bash
-npm run test         # Run tests
-npm run test:ui      # Interactive test UI
-\`\`\``
+npm run test      # Run tests
+npm run test:ui   # Run tests with UI
+\`\`\`
+
+`
     : ""
-}
+}## Project Structure
 
-## Project Structure
-
-\`\`\`
-${projectName}/
-├── app/              # Next.js App Router
-├── components/       # Reusable React components
-├── lib/              # Utility functions
-├── utils/            # Helper functions
-├── public/           # Static assets
-└── package.json
-\`\`\`
+- \`app/\` - App Router pages and layouts
+- \`components/\` - Reusable React components
+- \`lib/\` - Utility functions and helpers
+- \`utils/\` - Standalone utility functions
 
 ## Learn More
 
 - [Next.js Documentation](https://nextjs.org/docs)
 - [React Documentation](https://react.dev)
 ${config.useTailwind ? "- [Tailwind CSS Documentation](https://tailwindcss.com/docs)" : ""}
-
----
-
-Generated with [Alchemist CLI](https://github.com/your-org/alchemist)
+${config.useVitest ? "- [Vitest Documentation](https://vitest.dev)" : ""}
 `;
 }
